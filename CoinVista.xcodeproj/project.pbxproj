@@ -15,6 +15,13 @@
 		0DF8931F2DB7BD3800BE72DA /* CVDomain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF893162DB7BD3800BE72DA /* CVDomain.framework */; };
 		0DF893292DB7BD3800BE72DA /* CVDomain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF893162DB7BD3800BE72DA /* CVDomain.framework */; };
 		0DF8932A2DB7BD3800BE72DA /* CVDomain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF893162DB7BD3800BE72DA /* CVDomain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0DF8934E2DB7D17800BE72DA /* CVCommunication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF893452DB7D17800BE72DA /* CVCommunication.framework */; };
+		0DF893582DB7D17800BE72DA /* CVCommunication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF893452DB7D17800BE72DA /* CVCommunication.framework */; };
+		0DF893592DB7D17800BE72DA /* CVCommunication.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF893452DB7D17800BE72DA /* CVCommunication.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0DF8937D2DB7D35800BE72DA /* CVDomain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF893162DB7BD3800BE72DA /* CVDomain.framework */; };
+		0DF8939B2DB7F02400BE72DA /* CVPersistance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF893922DB7F02400BE72DA /* CVPersistance.framework */; };
+		0DF893A52DB7F02400BE72DA /* CVPersistance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF893922DB7F02400BE72DA /* CVPersistance.framework */; };
+		0DF893A62DB7F02400BE72DA /* CVPersistance.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF893922DB7F02400BE72DA /* CVPersistance.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +81,48 @@
 			remoteGlobalIDString = 0DF893152DB7BD3800BE72DA;
 			remoteInfo = CVDomain;
 		};
+		0DF8934F2DB7D17800BE72DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D0320592DB14B1F00B54E1D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0DF893442DB7D17800BE72DA;
+			remoteInfo = CVCommunication;
+		};
+		0DF893512DB7D17800BE72DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D0320592DB14B1F00B54E1D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D0320602DB14B1F00B54E1D;
+			remoteInfo = CoinVista;
+		};
+		0DF893562DB7D17800BE72DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D0320592DB14B1F00B54E1D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0DF893442DB7D17800BE72DA;
+			remoteInfo = CVCommunication;
+		};
+		0DF8939C2DB7F02400BE72DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D0320592DB14B1F00B54E1D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0DF893912DB7F02400BE72DA;
+			remoteInfo = CVPersistance;
+		};
+		0DF8939E2DB7F02400BE72DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D0320592DB14B1F00B54E1D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D0320602DB14B1F00B54E1D;
+			remoteInfo = CoinVista;
+		};
+		0DF893A32DB7F02400BE72DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D0320592DB14B1F00B54E1D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0DF893912DB7F02400BE72DA;
+			remoteInfo = CVPersistance;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -84,7 +133,9 @@
 			dstSubfolderSpec = 10;
 			files = (
 				0D0320A92DB14B2C00B54E1D /* Utilities.framework in Embed Frameworks */,
+				0DF893A62DB7F02400BE72DA /* CVPersistance.framework in Embed Frameworks */,
 				0DF8932A2DB7BD3800BE72DA /* CVDomain.framework in Embed Frameworks */,
+				0DF893592DB7D17800BE72DA /* CVCommunication.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,6 +150,10 @@
 		0D03209D2DB14B2C00B54E1D /* UtilitiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UtilitiesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DF893162DB7BD3800BE72DA /* CVDomain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CVDomain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DF8931E2DB7BD3800BE72DA /* CVDomainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CVDomainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DF893452DB7D17800BE72DA /* CVCommunication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CVCommunication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DF8934D2DB7D17800BE72DA /* CVCommunicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CVCommunicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DF893922DB7F02400BE72DA /* CVPersistance.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CVPersistance.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DF8939A2DB7F02400BE72DA /* CVPersistanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CVPersistanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -137,6 +192,26 @@
 			path = CVDomainTests;
 			sourceTree = "<group>";
 		};
+		0DF893462DB7D17800BE72DA /* CVCommunication */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CVCommunication;
+			sourceTree = "<group>";
+		};
+		0DF893532DB7D17800BE72DA /* CVCommunicationTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CVCommunicationTests;
+			sourceTree = "<group>";
+		};
+		0DF893932DB7F02400BE72DA /* CVPersistance */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CVPersistance;
+			sourceTree = "<group>";
+		};
+		0DF893A02DB7F02400BE72DA /* CVPersistanceTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CVPersistanceTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +219,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DF893582DB7D17800BE72DA /* CVCommunication.framework in Frameworks */,
 				0D0320A82DB14B2C00B54E1D /* Utilities.framework in Frameworks */,
+				0DF893A52DB7F02400BE72DA /* CVPersistance.framework in Frameworks */,
 				0DC7E31E2DB14E06002F53BD /* FirebaseCrashlytics in Frameworks */,
 				0DF893292DB7BD3800BE72DA /* CVDomain.framework in Frameworks */,
 			);
@@ -195,6 +272,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0DF893422DB7D17800BE72DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DF8937D2DB7D35800BE72DA /* CVDomain.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DF8934A2DB7D17800BE72DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DF8934E2DB7D17800BE72DA /* CVCommunication.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DF8938F2DB7F02400BE72DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DF893972DB7F02400BE72DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DF8939B2DB7F02400BE72DA /* CVPersistance.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -208,6 +316,10 @@
 				0D0320A32DB14B2C00B54E1D /* UtilitiesTests */,
 				0DF893172DB7BD3800BE72DA /* CVDomain */,
 				0DF893242DB7BD3800BE72DA /* CVDomainTests */,
+				0DF893462DB7D17800BE72DA /* CVCommunication */,
+				0DF893532DB7D17800BE72DA /* CVCommunicationTests */,
+				0DF893932DB7F02400BE72DA /* CVPersistance */,
+				0DF893A02DB7F02400BE72DA /* CVPersistanceTests */,
 				0DC7E31C2DB14E06002F53BD /* Frameworks */,
 				0D0320622DB14B1F00B54E1D /* Products */,
 			);
@@ -223,6 +335,10 @@
 				0D03209D2DB14B2C00B54E1D /* UtilitiesTests.xctest */,
 				0DF893162DB7BD3800BE72DA /* CVDomain.framework */,
 				0DF8931E2DB7BD3800BE72DA /* CVDomainTests.xctest */,
+				0DF893452DB7D17800BE72DA /* CVCommunication.framework */,
+				0DF8934D2DB7D17800BE72DA /* CVCommunicationTests.xctest */,
+				0DF893922DB7F02400BE72DA /* CVPersistance.framework */,
+				0DF8939A2DB7F02400BE72DA /* CVPersistanceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -251,6 +367,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0DF893402DB7D17800BE72DA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DF8938D2DB7F02400BE72DA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -268,6 +398,8 @@
 			dependencies = (
 				0D0320A72DB14B2C00B54E1D /* PBXTargetDependency */,
 				0DF893282DB7BD3800BE72DA /* PBXTargetDependency */,
+				0DF893572DB7D17800BE72DA /* PBXTargetDependency */,
+				0DF893A42DB7F02400BE72DA /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				0D0320632DB14B1F00B54E1D /* CoinVista */,
@@ -421,6 +553,100 @@
 			productReference = 0DF8931E2DB7BD3800BE72DA /* CVDomainTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		0DF893442DB7D17800BE72DA /* CVCommunication */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DF8935A2DB7D17800BE72DA /* Build configuration list for PBXNativeTarget "CVCommunication" */;
+			buildPhases = (
+				0DF893402DB7D17800BE72DA /* Headers */,
+				0DF893412DB7D17800BE72DA /* Sources */,
+				0DF893422DB7D17800BE72DA /* Frameworks */,
+				0DF893432DB7D17800BE72DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				0DF893462DB7D17800BE72DA /* CVCommunication */,
+			);
+			name = CVCommunication;
+			packageProductDependencies = (
+			);
+			productName = CVCommunication;
+			productReference = 0DF893452DB7D17800BE72DA /* CVCommunication.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		0DF8934C2DB7D17800BE72DA /* CVCommunicationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DF8935D2DB7D17800BE72DA /* Build configuration list for PBXNativeTarget "CVCommunicationTests" */;
+			buildPhases = (
+				0DF893492DB7D17800BE72DA /* Sources */,
+				0DF8934A2DB7D17800BE72DA /* Frameworks */,
+				0DF8934B2DB7D17800BE72DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0DF893502DB7D17800BE72DA /* PBXTargetDependency */,
+				0DF893522DB7D17800BE72DA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				0DF893532DB7D17800BE72DA /* CVCommunicationTests */,
+			);
+			name = CVCommunicationTests;
+			packageProductDependencies = (
+			);
+			productName = CVCommunicationTests;
+			productReference = 0DF8934D2DB7D17800BE72DA /* CVCommunicationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		0DF893912DB7F02400BE72DA /* CVPersistance */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DF893A72DB7F02400BE72DA /* Build configuration list for PBXNativeTarget "CVPersistance" */;
+			buildPhases = (
+				0DF8938D2DB7F02400BE72DA /* Headers */,
+				0DF8938E2DB7F02400BE72DA /* Sources */,
+				0DF8938F2DB7F02400BE72DA /* Frameworks */,
+				0DF893902DB7F02400BE72DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				0DF893932DB7F02400BE72DA /* CVPersistance */,
+			);
+			name = CVPersistance;
+			packageProductDependencies = (
+			);
+			productName = CVPersistance;
+			productReference = 0DF893922DB7F02400BE72DA /* CVPersistance.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		0DF893992DB7F02400BE72DA /* CVPersistanceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DF893AA2DB7F02400BE72DA /* Build configuration list for PBXNativeTarget "CVPersistanceTests" */;
+			buildPhases = (
+				0DF893962DB7F02400BE72DA /* Sources */,
+				0DF893972DB7F02400BE72DA /* Frameworks */,
+				0DF893982DB7F02400BE72DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0DF8939D2DB7F02400BE72DA /* PBXTargetDependency */,
+				0DF8939F2DB7F02400BE72DA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				0DF893A02DB7F02400BE72DA /* CVPersistanceTests */,
+			);
+			name = CVPersistanceTests;
+			packageProductDependencies = (
+			);
+			productName = CVPersistanceTests;
+			productReference = 0DF8939A2DB7F02400BE72DA /* CVPersistanceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -456,6 +682,20 @@
 						CreatedOnToolsVersion = 16.3;
 						TestTargetID = 0D0320602DB14B1F00B54E1D;
 					};
+					0DF893442DB7D17800BE72DA = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					0DF8934C2DB7D17800BE72DA = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 0D0320602DB14B1F00B54E1D;
+					};
+					0DF893912DB7F02400BE72DA = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					0DF893992DB7F02400BE72DA = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 0D0320602DB14B1F00B54E1D;
+					};
 				};
 			};
 			buildConfigurationList = 0D03205C2DB14B1F00B54E1D /* Build configuration list for PBXProject "CoinVista" */;
@@ -483,6 +723,10 @@
 				0D03209C2DB14B2C00B54E1D /* UtilitiesTests */,
 				0DF893152DB7BD3800BE72DA /* CVDomain */,
 				0DF8931D2DB7BD3800BE72DA /* CVDomainTests */,
+				0DF893442DB7D17800BE72DA /* CVCommunication */,
+				0DF8934C2DB7D17800BE72DA /* CVCommunicationTests */,
+				0DF893912DB7F02400BE72DA /* CVPersistance */,
+				0DF893992DB7F02400BE72DA /* CVPersistanceTests */,
 			);
 		};
 /* End PBXProject section */
@@ -531,6 +775,34 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0DF8931C2DB7BD3800BE72DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DF893432DB7D17800BE72DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DF8934B2DB7D17800BE72DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DF893902DB7F02400BE72DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DF893982DB7F02400BE72DA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -589,6 +861,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0DF893412DB7D17800BE72DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DF893492DB7D17800BE72DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DF8938E2DB7F02400BE72DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DF893962DB7F02400BE72DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -631,6 +931,36 @@
 			isa = PBXTargetDependency;
 			target = 0DF893152DB7BD3800BE72DA /* CVDomain */;
 			targetProxy = 0DF893272DB7BD3800BE72DA /* PBXContainerItemProxy */;
+		};
+		0DF893502DB7D17800BE72DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0DF893442DB7D17800BE72DA /* CVCommunication */;
+			targetProxy = 0DF8934F2DB7D17800BE72DA /* PBXContainerItemProxy */;
+		};
+		0DF893522DB7D17800BE72DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0D0320602DB14B1F00B54E1D /* CoinVista */;
+			targetProxy = 0DF893512DB7D17800BE72DA /* PBXContainerItemProxy */;
+		};
+		0DF893572DB7D17800BE72DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0DF893442DB7D17800BE72DA /* CVCommunication */;
+			targetProxy = 0DF893562DB7D17800BE72DA /* PBXContainerItemProxy */;
+		};
+		0DF8939D2DB7F02400BE72DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0DF893912DB7F02400BE72DA /* CVPersistance */;
+			targetProxy = 0DF8939C2DB7F02400BE72DA /* PBXContainerItemProxy */;
+		};
+		0DF8939F2DB7F02400BE72DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0D0320602DB14B1F00B54E1D /* CoinVista */;
+			targetProxy = 0DF8939E2DB7F02400BE72DA /* PBXContainerItemProxy */;
+		};
+		0DF893A42DB7F02400BE72DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0DF893912DB7F02400BE72DA /* CVPersistance */;
+			targetProxy = 0DF893A32DB7F02400BE72DA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1092,6 +1422,214 @@
 			};
 			name = Release;
 		};
+		0DF8935B2DB7D17800BE72DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R8S98YHV2J;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lla.CVCommunication;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0DF8935C2DB7D17800BE72DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R8S98YHV2J;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lla.CVCommunication;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		0DF8935E2DB7D17800BE72DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R8S98YHV2J;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lla.CVCommunicationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoinVista.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CoinVista";
+			};
+			name = Debug;
+		};
+		0DF8935F2DB7D17800BE72DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R8S98YHV2J;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lla.CVCommunicationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoinVista.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CoinVista";
+			};
+			name = Release;
+		};
+		0DF893A82DB7F02400BE72DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R8S98YHV2J;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lla.CVPersistance;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0DF893A92DB7F02400BE72DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R8S98YHV2J;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lla.CVPersistance;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		0DF893AB2DB7F02400BE72DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R8S98YHV2J;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lla.CVPersistanceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoinVista.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CoinVista";
+			};
+			name = Debug;
+		};
+		0DF893AC2DB7F02400BE72DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R8S98YHV2J;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lla.CVPersistanceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoinVista.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CoinVista";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1163,6 +1701,42 @@
 			buildConfigurations = (
 				0DF8932D2DB7BD3800BE72DA /* Debug */,
 				0DF8932E2DB7BD3800BE72DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0DF8935A2DB7D17800BE72DA /* Build configuration list for PBXNativeTarget "CVCommunication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DF8935B2DB7D17800BE72DA /* Debug */,
+				0DF8935C2DB7D17800BE72DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0DF8935D2DB7D17800BE72DA /* Build configuration list for PBXNativeTarget "CVCommunicationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DF8935E2DB7D17800BE72DA /* Debug */,
+				0DF8935F2DB7D17800BE72DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0DF893A72DB7F02400BE72DA /* Build configuration list for PBXNativeTarget "CVPersistance" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DF893A82DB7F02400BE72DA /* Debug */,
+				0DF893A92DB7F02400BE72DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0DF893AA2DB7F02400BE72DA /* Build configuration list for PBXNativeTarget "CVPersistanceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DF893AB2DB7F02400BE72DA /* Debug */,
+				0DF893AC2DB7F02400BE72DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -3,20 +3,21 @@
 //
 //  Created by lla.
 
-import Utilities
 import SwiftUI
+import CVDomain
+import CVCommunication
+import Utilities
 
 struct TabBarView: View {
 
     private let logger: CVLogger = CompositeLogger([
-            DefaultLogger(),
-            SwiftyBeaverLogger()
-            // + CrashlyticsLogger()
-        ])
+        DefaultLogger(),
+        SwiftyBeaverLogger()
+    ])
 
     var body: some View {
         TabView {
-            MarketsView()
+            marketsTab
                 .tabItem {
                     Label("Markets", systemImage: "chart.bar")
                 }
@@ -31,6 +32,14 @@ struct TabBarView: View {
                     Label("Settings", systemImage: "gear")
                 }
         }
+    }
+
+    private var marketsTab: some View {
+        let service = BinanceMarketService()
+        let repository = MarketRepositoryImpl(service: service)
+        let useCase = DefaultFetchMarketsUseCase(repository: repository)
+        let viewModel = MarketsViewModel(useCase: useCase)
+        return MarketsView(viewModel: viewModel)
     }
 }
 
