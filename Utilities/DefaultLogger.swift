@@ -9,18 +9,18 @@ public final class DefaultLogger: CVLogger {
     public init() {}
 
     public func debug(_ message: String) {
-        print("🐞 [DEBUG]: \(message)")
+        print("[DEBUG]: \(message)")
     }
 
     public func info(_ message: String) {
-        print("ℹ️ [INFO]: \(message)")
+        print("[INFO]: \(message)")
     }
 
     public func warning(_ message: String) {
-        print("⚠️ [WARNING]: \(message)")
+        print("[WARNING]: \(message)")
     }
 
     public func error(_ message: String) {
-        print("❌ [ERROR]: \(message)")
+        print("[ERROR]: \(message)")
     }
 }

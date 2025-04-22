@@ -12,6 +12,9 @@
 		0D0320A92DB14B2C00B54E1D /* Utilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0320952DB14B2C00B54E1D /* Utilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0D0320B62DB14B8A00B54E1D /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 0D0320B52DB14B8A00B54E1D /* SwiftyBeaver */; };
 		0DC7E31E2DB14E06002F53BD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0DC7E31D2DB14E06002F53BD /* FirebaseCrashlytics */; };
+		0DF8931F2DB7BD3800BE72DA /* CVDomain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF893162DB7BD3800BE72DA /* CVDomain.framework */; };
+		0DF893292DB7BD3800BE72DA /* CVDomain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF893162DB7BD3800BE72DA /* CVDomain.framework */; };
+		0DF8932A2DB7BD3800BE72DA /* CVDomain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF893162DB7BD3800BE72DA /* CVDomain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +53,27 @@
 			remoteGlobalIDString = 0D0320942DB14B2C00B54E1D;
 			remoteInfo = Utilities;
 		};
+		0DF893202DB7BD3800BE72DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D0320592DB14B1F00B54E1D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0DF893152DB7BD3800BE72DA;
+			remoteInfo = CVDomain;
+		};
+		0DF893222DB7BD3800BE72DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D0320592DB14B1F00B54E1D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D0320602DB14B1F00B54E1D;
+			remoteInfo = CoinVista;
+		};
+		0DF893272DB7BD3800BE72DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D0320592DB14B1F00B54E1D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0DF893152DB7BD3800BE72DA;
+			remoteInfo = CVDomain;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,6 +84,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				0D0320A92DB14B2C00B54E1D /* Utilities.framework in Embed Frameworks */,
+				0DF8932A2DB7BD3800BE72DA /* CVDomain.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -72,6 +97,8 @@
 		0D03207D2DB14B1F00B54E1D /* CoinVistaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoinVistaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D0320952DB14B2C00B54E1D /* Utilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Utilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D03209D2DB14B2C00B54E1D /* UtilitiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UtilitiesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DF893162DB7BD3800BE72DA /* CVDomain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CVDomain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DF8931E2DB7BD3800BE72DA /* CVDomainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CVDomainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -100,6 +127,16 @@
 			path = UtilitiesTests;
 			sourceTree = "<group>";
 		};
+		0DF893172DB7BD3800BE72DA /* CVDomain */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CVDomain;
+			sourceTree = "<group>";
+		};
+		0DF893242DB7BD3800BE72DA /* CVDomainTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CVDomainTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +146,7 @@
 			files = (
 				0D0320A82DB14B2C00B54E1D /* Utilities.framework in Frameworks */,
 				0DC7E31E2DB14E06002F53BD /* FirebaseCrashlytics in Frameworks */,
+				0DF893292DB7BD3800BE72DA /* CVDomain.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +180,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0DF893132DB7BD3800BE72DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DF8931B2DB7BD3800BE72DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DF8931F2DB7BD3800BE72DA /* CVDomain.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -153,6 +206,8 @@
 				0D0320802DB14B1F00B54E1D /* CoinVistaUITests */,
 				0D0320962DB14B2C00B54E1D /* Utilities */,
 				0D0320A32DB14B2C00B54E1D /* UtilitiesTests */,
+				0DF893172DB7BD3800BE72DA /* CVDomain */,
+				0DF893242DB7BD3800BE72DA /* CVDomainTests */,
 				0DC7E31C2DB14E06002F53BD /* Frameworks */,
 				0D0320622DB14B1F00B54E1D /* Products */,
 			);
@@ -166,6 +221,8 @@
 				0D03207D2DB14B1F00B54E1D /* CoinVistaUITests.xctest */,
 				0D0320952DB14B2C00B54E1D /* Utilities.framework */,
 				0D03209D2DB14B2C00B54E1D /* UtilitiesTests.xctest */,
+				0DF893162DB7BD3800BE72DA /* CVDomain.framework */,
+				0DF8931E2DB7BD3800BE72DA /* CVDomainTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -181,6 +238,13 @@
 
 /* Begin PBXHeadersBuildPhase section */
 		0D0320902DB14B2C00B54E1D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DF893112DB7BD3800BE72DA /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -203,6 +267,7 @@
 			);
 			dependencies = (
 				0D0320A72DB14B2C00B54E1D /* PBXTargetDependency */,
+				0DF893282DB7BD3800BE72DA /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				0D0320632DB14B1F00B54E1D /* CoinVista */,
@@ -309,6 +374,53 @@
 			productReference = 0D03209D2DB14B2C00B54E1D /* UtilitiesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		0DF893152DB7BD3800BE72DA /* CVDomain */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DF8932F2DB7BD3800BE72DA /* Build configuration list for PBXNativeTarget "CVDomain" */;
+			buildPhases = (
+				0DF893112DB7BD3800BE72DA /* Headers */,
+				0DF893122DB7BD3800BE72DA /* Sources */,
+				0DF893132DB7BD3800BE72DA /* Frameworks */,
+				0DF893142DB7BD3800BE72DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				0DF893172DB7BD3800BE72DA /* CVDomain */,
+			);
+			name = CVDomain;
+			packageProductDependencies = (
+			);
+			productName = CVDomain;
+			productReference = 0DF893162DB7BD3800BE72DA /* CVDomain.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		0DF8931D2DB7BD3800BE72DA /* CVDomainTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DF893302DB7BD3800BE72DA /* Build configuration list for PBXNativeTarget "CVDomainTests" */;
+			buildPhases = (
+				0DF8931A2DB7BD3800BE72DA /* Sources */,
+				0DF8931B2DB7BD3800BE72DA /* Frameworks */,
+				0DF8931C2DB7BD3800BE72DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0DF893212DB7BD3800BE72DA /* PBXTargetDependency */,
+				0DF893232DB7BD3800BE72DA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				0DF893242DB7BD3800BE72DA /* CVDomainTests */,
+			);
+			name = CVDomainTests;
+			packageProductDependencies = (
+			);
+			productName = CVDomainTests;
+			productReference = 0DF8931E2DB7BD3800BE72DA /* CVDomainTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -337,6 +449,13 @@
 						CreatedOnToolsVersion = 16.3;
 						TestTargetID = 0D0320602DB14B1F00B54E1D;
 					};
+					0DF893152DB7BD3800BE72DA = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					0DF8931D2DB7BD3800BE72DA = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 0D0320602DB14B1F00B54E1D;
+					};
 				};
 			};
 			buildConfigurationList = 0D03205C2DB14B1F00B54E1D /* Build configuration list for PBXProject "CoinVista" */;
@@ -362,6 +481,8 @@
 				0D03207C2DB14B1F00B54E1D /* CoinVistaUITests */,
 				0D0320942DB14B2C00B54E1D /* Utilities */,
 				0D03209C2DB14B2C00B54E1D /* UtilitiesTests */,
+				0DF893152DB7BD3800BE72DA /* CVDomain */,
+				0DF8931D2DB7BD3800BE72DA /* CVDomainTests */,
 			);
 		};
 /* End PBXProject section */
@@ -396,6 +517,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0D03209B2DB14B2C00B54E1D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DF893142DB7BD3800BE72DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DF8931C2DB7BD3800BE72DA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -440,6 +575,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0DF893122DB7BD3800BE72DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DF8931A2DB7BD3800BE72DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -467,6 +616,21 @@
 			isa = PBXTargetDependency;
 			target = 0D0320942DB14B2C00B54E1D /* Utilities */;
 			targetProxy = 0D0320A62DB14B2C00B54E1D /* PBXContainerItemProxy */;
+		};
+		0DF893212DB7BD3800BE72DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0DF893152DB7BD3800BE72DA /* CVDomain */;
+			targetProxy = 0DF893202DB7BD3800BE72DA /* PBXContainerItemProxy */;
+		};
+		0DF893232DB7BD3800BE72DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0D0320602DB14B1F00B54E1D /* CoinVista */;
+			targetProxy = 0DF893222DB7BD3800BE72DA /* PBXContainerItemProxy */;
+		};
+		0DF893282DB7BD3800BE72DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0DF893152DB7BD3800BE72DA /* CVDomain */;
+			targetProxy = 0DF893272DB7BD3800BE72DA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -824,6 +988,110 @@
 			};
 			name = Release;
 		};
+		0DF8932B2DB7BD3800BE72DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R8S98YHV2J;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lla.CVDomain;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0DF8932C2DB7BD3800BE72DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R8S98YHV2J;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lla.CVDomain;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		0DF8932D2DB7BD3800BE72DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R8S98YHV2J;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lla.CVDomainTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoinVista.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CoinVista";
+			};
+			name = Debug;
+		};
+		0DF8932E2DB7BD3800BE72DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R8S98YHV2J;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lla.CVDomainTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoinVista.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CoinVista";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -877,6 +1145,24 @@
 			buildConfigurations = (
 				0D0320AF2DB14B2C00B54E1D /* Debug */,
 				0D0320B02DB14B2C00B54E1D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0DF8932F2DB7BD3800BE72DA /* Build configuration list for PBXNativeTarget "CVDomain" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DF8932B2DB7BD3800BE72DA /* Debug */,
+				0DF8932C2DB7BD3800BE72DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0DF893302DB7BD3800BE72DA /* Build configuration list for PBXNativeTarget "CVDomainTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DF8932D2DB7BD3800BE72DA /* Debug */,
+				0DF8932E2DB7BD3800BE72DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
