@@ -8,7 +8,10 @@ import Foundation
 public struct BinanceConfiguration {
     public let baseURL: URL
 
-    public init(baseURL: URL = URL(string: "https://api.binance.com")!) {
-        self.baseURL = baseURL
+    public init?(baseURLString: String = "https://api.binance.com") {
+        guard let url = URL(string: baseURLString) else {
+            return nil
+        }
+        self.baseURL = url
     }
 }

@@ -9,13 +9,10 @@ import SwiftUI
 
 @main
 struct CoinVistaApp: App {
-    let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
             TabBarView()
-//            ContentView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

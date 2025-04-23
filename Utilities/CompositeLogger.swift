@@ -3,6 +3,13 @@
 //
 //  Created by lla.
 
+public enum CVLog {
+    public static let shared: CVLogger = CompositeLogger([
+        DefaultLogger(),
+        SwiftyBeaverLogger()
+    ])
+}
+
 public final class CompositeLogger: CVLogger {
     private let loggers: [CVLogger]
 

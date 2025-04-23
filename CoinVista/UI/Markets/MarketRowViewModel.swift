@@ -16,7 +16,7 @@ struct MarketRowViewModel: Identifiable, Equatable {
         self.id = coin.symbol
         self.name = coin.baseAsset
         if let quote = quote {
-            self.price = Self.format(decimal: quote.price)
+            self.price = Self.format(decimal: quote.price, asset: coin.quoteAsset)
             self.change = Self.formatChange(quote.priceChangePercent)
         } else {
             self.price = "-"
@@ -24,9 +24,14 @@ struct MarketRowViewModel: Identifiable, Equatable {
         }
     }
 
-    private static func format(decimal: Decimal) -> String {
+    private static func format(decimal: Decimal, asset: String) -> String {
         let number = NSDecimalNumber(decimal: decimal)
-        return NumberFormatter.currency.string(from: number) ?? "-"
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 8
+        formatter.minimumFractionDigits = 2
+        let value = formatter.string(from: number) ?? "-"
+        return value + " " + asset
     }
 
     private static func formatChange(_ value: Decimal) -> String {
@@ -38,13 +43,6 @@ struct MarketRowViewModel: Identifiable, Equatable {
 }
 
 private extension NumberFormatter {
-    static let currency: NumberFormatter = {
-        let f = NumberFormatter()
-        f.numberStyle = .currency
-        f.maximumFractionDigits = 6
-        return f
-    }()
-
     static let percent: NumberFormatter = {
         let f = NumberFormatter()
         f.numberStyle = .percent

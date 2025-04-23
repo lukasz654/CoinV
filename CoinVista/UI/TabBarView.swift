@@ -6,14 +6,12 @@
 import SwiftUI
 import CVDomain
 import CVCommunication
+import CVPersistance
 import Utilities
 
 struct TabBarView: View {
 
-    private let logger: CVLogger = CompositeLogger([
-        DefaultLogger(),
-        SwiftyBeaverLogger()
-    ])
+    private let logger = CVLog.shared
 
     var body: some View {
         TabView {
@@ -35,16 +33,26 @@ struct TabBarView: View {
     }
 
     private var marketsTab: some View {
-        let service = BinanceMarketService()
-        let repository = MarketRepositoryImpl(service: service)
-        let useCase = DefaultFetchMarketsUseCase(repository: repository)
-        let viewModel = MarketsViewModel(useCase: useCase)
-        return MarketsView(viewModel: viewModel)
+        do {
+            let service = try BinanceMarketService()
+            let remote = MarketRepositoryImpl(service: service)
+            let repository = CachedMarketRepository(remote: remote)
+            let useCase = DefaultFetchMarketsUseCase(repository: repository)
+            let viewModel = MarketsViewModel(useCase: useCase)
+            return AnyView(MarketsView(viewModel: viewModel))
+        } catch {
+            logger.error("Failed to initialize BinanceMarketService: \(error.localizedDescription)")
+            return AnyView(ErrorView(message: "Configuration error"))
+        }
     }
 }
 
 #if DEBUG
-#Preview {
+#Preview("Default") {
     TabBarView()
+}
+
+#Preview("Error") {
+    ErrorView(message: "Configuration error (preview)")
 }
 #endif

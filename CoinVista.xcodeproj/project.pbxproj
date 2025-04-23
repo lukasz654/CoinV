@@ -11,6 +11,7 @@
 		0D0320A82DB14B2C00B54E1D /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0320952DB14B2C00B54E1D /* Utilities.framework */; };
 		0D0320A92DB14B2C00B54E1D /* Utilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0320952DB14B2C00B54E1D /* Utilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0D0320B62DB14B8A00B54E1D /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 0D0320B52DB14B8A00B54E1D /* SwiftyBeaver */; };
+		0D4FE07A2DB956B400DE69B2 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0320952DB14B2C00B54E1D /* Utilities.framework */; };
 		0DC7E31E2DB14E06002F53BD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0DC7E31D2DB14E06002F53BD /* FirebaseCrashlytics */; };
 		0DF8931F2DB7BD3800BE72DA /* CVDomain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF893162DB7BD3800BE72DA /* CVDomain.framework */; };
 		0DF893292DB7BD3800BE72DA /* CVDomain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF893162DB7BD3800BE72DA /* CVDomain.framework */; };
@@ -156,6 +157,16 @@
 		0DF8939A2DB7F02400BE72DA /* CVPersistanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CVPersistanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		0D4FE04F2DB9187200DE69B2 /* Exceptions for "CVPersistance" folder in "CVPersistance" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				CVModel.xcdatamodeld,
+			);
+			target = 0DF893912DB7F02400BE72DA /* CVPersistance */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0D0320632DB14B1F00B54E1D /* CoinVista */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -204,6 +215,9 @@
 		};
 		0DF893932DB7F02400BE72DA /* CVPersistance */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				0D4FE04F2DB9187200DE69B2 /* Exceptions for "CVPersistance" folder in "CVPersistance" target */,
+			);
 			path = CVPersistance;
 			sourceTree = "<group>";
 		};
@@ -219,9 +233,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0DF893582DB7D17800BE72DA /* CVCommunication.framework in Frameworks */,
 				0D0320A82DB14B2C00B54E1D /* Utilities.framework in Frameworks */,
 				0DF893A52DB7F02400BE72DA /* CVPersistance.framework in Frameworks */,
+				0DF893582DB7D17800BE72DA /* CVCommunication.framework in Frameworks */,
 				0DC7E31E2DB14E06002F53BD /* FirebaseCrashlytics in Frameworks */,
 				0DF893292DB7BD3800BE72DA /* CVDomain.framework in Frameworks */,
 			);
@@ -292,6 +306,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D4FE07A2DB956B400DE69B2 /* Utilities.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

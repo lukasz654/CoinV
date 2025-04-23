@@ -5,22 +5,20 @@
 
 import Foundation
 
-public enum Endpoint {
-    case exchangeInfo
-    case ticker24h
+public enum Endpoint: String {
+    case exchangeInfo = "/api/v3/exchangeInfo"
+    case ticker24h = "/api/v3/ticker/24hr"
 
-    public func makeRequest(using configuration: BinanceConfiguration) -> URLRequest {
-        let url: URL?
-        switch self {
-        case .exchangeInfo:
-            url = URL(string: "/api/v3/exchangeInfo", relativeTo: configuration.baseURL)
-        case .ticker24h:
-            url = URL(string: "/api/v3/ticker/24hr", relativeTo: configuration.baseURL)
+    public func makeRequest(using configuration: BinanceConfiguration) throws -> URLRequest {
+        guard let url = URL(string: rawValue, relativeTo: configuration.baseURL) else {
+            throw EndpointError.invalidURL(rawValue)
         }
-
-        let safeURL = url ?? configuration.baseURL
-        var request = URLRequest(url: safeURL)
+        var request = URLRequest(url: url)
         request.httpMethod = "GET"
         return request
     }
+}
+
+public enum EndpointError: Error, Equatable {
+    case invalidURL(String)
 }

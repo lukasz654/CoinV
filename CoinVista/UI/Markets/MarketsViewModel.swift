@@ -3,30 +3,96 @@
 //
 //  Created by lla.
 
+import Combine
+import CVCommunication
 import CVDomain
 import Foundation
+import Utilities
 
 @MainActor
 final class MarketsViewModel: ObservableObject {
+    enum LoadState: Equatable {
+        case idle
+        case loading
+        case success
+        case failure
+        case offlineWithCache
+    }
+
     @Published private(set) var items: [MarketRowViewModel] = []
-    @Published private(set) var isLoading = false
-    @Published var error: String?
+    @Published var searchText: String = ""
+    @Published private(set) var loadState: LoadState = .idle
+    @Published var lastUpdate: Date?
+    @Published var error: BinanceServiceError?
 
     private let useCase: FetchMarketsUseCase
+    private var allItems: [MarketRowViewModel] = []
+    private var cancellables = Set<AnyCancellable>()
+    private let logger = CVLog.shared
 
     init(useCase: FetchMarketsUseCase) {
+        print("MarketsViewModel initialized")
         self.useCase = useCase
+        setupBindings()
     }
 
     func load() async {
-        isLoading = true
-        defer { isLoading = false }
+        loadState = .loading
+        defer {
+            if items.isEmpty {
+                loadState = .idle
+            }
+        }
 
         do {
             let result = try await useCase.execute()
-            items = result.map { MarketRowViewModel(coin: $0.coin, quote: $0.quote) }
+            allItems = result.map { MarketRowViewModel(coin: $0.coin, quote: $0.quote) }
+            applyFilter()
+            lastUpdate = Date()
+            loadState = .success
+            error = nil
+        } catch let BinanceServiceError.invalidResponse(code, message) {
+            logger.error("Binance API error [\(code)]: \(message ?? "Unknown")")
+            self.error = BinanceServiceError.invalidResponse(code: code, message: message)
+            if !allItems.isEmpty {
+                loadState = .offlineWithCache
+            } else {
+                loadState = .failure
+            }
         } catch {
-            self.error = "Failed to load markets."
+            logger.error("Unexpected error: \(error)")
+            self.error = error as? BinanceServiceError ?? .requestFailed(error)
+            if !allItems.isEmpty {
+                loadState = .offlineWithCache
+            } else {
+                loadState = .failure
+            }
         }
+    }
+
+    func retry() async {
+        await load()
+    }
+
+    func applyFilter() {
+        if searchText.isEmpty {
+            items = allItems
+        } else {
+            let lowercased = searchText.lowercased()
+            items = allItems.filter {
+                $0.name.lowercased().contains(lowercased)
+            }
+        }
+    }
+
+    private func setupBindings() {
+        $searchText
+            .removeDuplicates()
+            .debounce(for: .milliseconds(200), scheduler: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.applyFilter()
+                self?.logger.info("Search filter applied: \(self?.searchText ?? "")")
+            }
+            .store(in: &cancellables)
     }
 }
