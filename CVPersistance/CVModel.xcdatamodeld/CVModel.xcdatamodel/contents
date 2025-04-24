@@ -2,8 +2,15 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788" systemVersion="24E263" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="CoinEntity" representedClassName="CoinEntity" syncable="YES" codeGenerationType="class">
         <attribute name="baseAsset" optional="YES" attributeType="String"/>
+        <attribute name="isWatchlisted" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="quoteAsset" optional="YES" attributeType="String"/>
         <attribute name="symbol" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="CoinQuoteEntity" representedClassName="CoinQuoteEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="price" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="priceChangePercent" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="symbol" optional="YES" attributeType="String"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <entity name="LastFetchInfoEntity" representedClassName="LastFetchInfoEntity" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

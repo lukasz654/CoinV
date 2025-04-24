@@ -11,6 +11,7 @@ public enum PersistenceError: Error {
     case modelNotFound
     case persistentStoreLoadingFailed(Error)
     case saveFailed(Error)
+    case entityNotFound(String)
 }
 
 public final class PersistenceController {
@@ -20,6 +21,10 @@ public final class PersistenceController {
 
     public var viewContext: NSManagedObjectContext {
         container.viewContext
+    }
+
+    public var backgroundContext: NSManagedObjectContext {
+        container.newBackgroundContext()
     }
 
     private let logger = CVLog.shared

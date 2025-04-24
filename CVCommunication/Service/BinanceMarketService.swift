@@ -6,7 +6,6 @@
 import Foundation
 
 public enum BinanceServiceError: Error {
-    case invalidConfiguration
     case invalidURL
     case requestFailed(Error)
     case invalidResponse(code: Int, message: String?)
@@ -22,10 +21,7 @@ public final class BinanceMarketService: MarketService {
     private let session: URLSession
     private let configuration: BinanceConfiguration
 
-    public init(session: URLSession = .shared, configuration: BinanceConfiguration? = BinanceConfiguration()) throws {
-        guard let configuration = configuration else {
-            throw BinanceServiceError.invalidConfiguration
-        }
+    public init(session: URLSession = .shared, configuration: BinanceConfiguration) {
         self.session = session
         self.configuration = configuration
     }

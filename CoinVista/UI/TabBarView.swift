@@ -13,9 +13,26 @@ struct TabBarView: View {
 
     private let logger = CVLog.shared
 
+    @StateObject private var viewModel: MarketsViewModel
+
+       init() {
+           let configuration = BinanceConfiguration()
+           let service = BinanceMarketService(configuration: configuration)
+           let remote = MarketRepositoryImpl(service: service)
+           let repository = CachedMarketRepository(remote: remote)
+           let fetchUseCase = DefaultFetchMarketsUseCase(repository: repository)
+           let toggleUseCase = DefaultToggleWatchlistUseCase(repository: repository)
+           let viewModel = MarketsViewModel(useCase: fetchUseCase,toggleWatchlistUseCase: toggleUseCase)
+           _viewModel = StateObject(wrappedValue:
+                                        MarketsViewModel(
+                                            useCase: fetchUseCase,
+                                            toggleWatchlistUseCase: toggleUseCase)
+           )
+       }
+
     var body: some View {
         TabView {
-            marketsTab
+            MarketsView(viewModel: viewModel)
                 .tabItem {
                     Label("Markets", systemImage: "chart.bar")
                 }
@@ -29,20 +46,6 @@ struct TabBarView: View {
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
-        }
-    }
-
-    private var marketsTab: some View {
-        do {
-            let service = try BinanceMarketService()
-            let remote = MarketRepositoryImpl(service: service)
-            let repository = CachedMarketRepository(remote: remote)
-            let useCase = DefaultFetchMarketsUseCase(repository: repository)
-            let viewModel = MarketsViewModel(useCase: useCase)
-            return AnyView(MarketsView(viewModel: viewModel))
-        } catch {
-            logger.error("Failed to initialize BinanceMarketService: \(error.localizedDescription)")
-            return AnyView(ErrorView(message: "Configuration error"))
         }
     }
 }

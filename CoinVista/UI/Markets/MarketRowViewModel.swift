@@ -8,20 +8,30 @@ import Foundation
 
 struct MarketRowViewModel: Identifiable, Equatable {
     let id: String
-    let name: String
-    let price: String
-    let change: String
+    let coin: Coin
+    let quote: CoinQuote?
+
+    var name: String { coin.baseAsset }
+    var isWatchlisted: Bool { coin.isWatchlisted }
+
+    var price: String {
+        guard let quote else {
+            return "-"
+        }
+        return Self.format(decimal: quote.price, asset: coin.quoteAsset)
+    }
+
+    var change: String {
+        guard let quote else {
+            return "-"
+        }
+        return Self.formatChange(quote.priceChangePercent)
+    }
 
     init(coin: Coin, quote: CoinQuote?) {
         self.id = coin.symbol
-        self.name = coin.baseAsset
-        if let quote = quote {
-            self.price = Self.format(decimal: quote.price, asset: coin.quoteAsset)
-            self.change = Self.formatChange(quote.priceChangePercent)
-        } else {
-            self.price = "-"
-            self.change = "-"
-        }
+        self.coin = coin
+        self.quote = quote
     }
 
     private static func format(decimal: Decimal, asset: String) -> String {

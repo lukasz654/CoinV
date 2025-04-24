@@ -12,15 +12,18 @@ public final class CachedMarketRepository: MarketRepository {
 
     private let logger = CVLog.shared
 
-    private let context: NSManagedObjectContext
+    private let viewContext: NSManagedObjectContext
+    private let backgroundContext: NSManagedObjectContext
     private let remote: MarketRepository
     private let calendar: Calendar
     private let freshnessThreshold: TimeInterval = 3600 // 1 hour
 
-    public init(context: NSManagedObjectContext = PersistenceController.shared.viewContext,
+    public init(viewContext: NSManagedObjectContext = PersistenceController.shared.viewContext,
+                backgroundContext: NSManagedObjectContext = PersistenceController.shared.backgroundContext,
                 remote: MarketRepository,
                 calendar: Calendar = .current) {
-        self.context = context
+        self.viewContext = viewContext
+        self.backgroundContext = backgroundContext
         self.remote = remote
         self.calendar = calendar
     }
@@ -38,10 +41,6 @@ public final class CachedMarketRepository: MarketRepository {
         }
     }
 
-    public func fetchQuotes() async throws -> [CoinQuote] {
-        try await remote.fetchQuotes()
-    }
-
     private func isFresh(date: Date) -> Bool {
         guard let diff = calendar.dateComponents([.second], from: date, to: Date()).second else {
             return false
@@ -53,44 +52,52 @@ public final class CachedMarketRepository: MarketRepository {
         let request = CoinEntity.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "symbol", ascending: true)]
 
-        let result = (try? context.fetch(request)) ?? []
+        let result = (try? viewContext.fetch(request)) ?? []
         logger.info("Fetched \(result.count) coins from cache.")
         return CoinPersistenceMapper.map(entities: result)
     }
 
     private func persist(coins: [Coin]) throws {
-        try validateEntityExists(named: "CoinEntity")
-        try deleteAllEntities(named: "CoinEntity")
+        try backgroundContext.performAndWait {
+            for coin in coins {
+                _ = CoinPersistenceMapper.map(domain: coin, into: backgroundContext)
+            }
 
-        for coin in coins {
-            _ = CoinPersistenceMapper.map(domain: coin, into: context)
-        }
-
-        do {
-            try context.save()
+            try backgroundContext.save()
             logger.info("Persisted \(coins.count) coins to cache.")
-        } catch {
-            logger.error("Failed to save context: \(error.localizedDescription)")
-            throw PersistenceError.saveFailed(error)
+        }
+    }
+    
+    public func fetchQuotes() async throws -> [CoinQuote] {
+        if let lastFetch = try? fetchLastFetchDate(type: "quotes"), isFresh(date: lastFetch) {
+            logger.info("Using cached quotes.")
+            return fetchQuotesFromCache()
+        } else {
+            logger.info("Fetching fresh quotes from remote.")
+            let quotes = try await remote.fetchQuotes()
+            try persist(quotes: quotes)
+            try saveLastFetchDate(type: "quotes")
+            return quotes
         }
     }
 
-    private func validateEntityExists(named name: String) throws {
-        guard context.persistentStoreCoordinator?.managedObjectModel.entitiesByName[name] != nil else {
-            let error = NSError(
-                domain: "CVPersistence",
-                code: 1001,
-                userInfo: [NSLocalizedDescriptionKey: "\(name) not found in Core Data model"]
-            )
-            logger.error("CoreData error: \(error.localizedDescription)")
-            throw error
-        }
+    private func fetchQuotesFromCache() -> [CoinQuote] {
+        let request = CoinQuoteEntity.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "symbol", ascending: true)]
+
+        let result = (try? viewContext.fetch(request)) ?? []
+        return result.compactMap { CoinQuotePersistenceMapper.map(entity: $0) }
     }
 
-    private func deleteAllEntities(named name: String) throws {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: name)
-        let delete = NSBatchDeleteRequest(fetchRequest: request)
-        try context.execute(delete)
+    private func persist(quotes: [CoinQuote]) throws {
+        try backgroundContext.performAndWait {
+            for quote in quotes {
+                _ = CoinQuotePersistenceMapper.map(domain: quote, into: backgroundContext)
+            }
+
+            try backgroundContext.save()
+            logger.info("Persisted \(quotes.count) quotes to cache.")
+        }
     }
 
     private func fetchLastFetchDate(type: String) throws -> Date? {
@@ -98,20 +105,41 @@ public final class CachedMarketRepository: MarketRepository {
         request.predicate = NSPredicate(format: "type == %@", type)
         request.fetchLimit = 1
 
-        let date = try context.fetch(request).first?.timestamp
-        logger.info("Last fetch date for \(type): \(date?.description ?? "nil")")
-        return date
+        let result = try viewContext.fetch(request).first?.timestamp
+        logger.info("Last fetch date for \(type): \(result?.description ?? "nil")")
+        return result
     }
 
     private func saveLastFetchDate(type: String) throws {
-        let request = LastFetchInfoEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "type == %@", type)
+        try backgroundContext.performAndWait {
+            let request = LastFetchInfoEntity.fetchRequest()
+            request.predicate = NSPredicate(format: "type == %@", type)
 
-        let existing = try context.fetch(request).first ?? LastFetchInfoEntity(context: context)
-        existing.type = type
-        existing.timestamp = Date()
+            let existing = try backgroundContext.fetch(request).first ?? LastFetchInfoEntity(context: backgroundContext)
+            existing.type = type
+            existing.timestamp = Date()
 
-        try context.save()
-        logger.info("Saved fetch timestamp for \(type).")
+            try backgroundContext.save()
+            logger.info("Saved fetch timestamp for \(type).")
+        }
     }
+
+    public func toggleWatchlist(for symbol: String) throws {
+            try backgroundContext.performAndWait {
+                let request: NSFetchRequest<CoinEntity> = CoinEntity.fetchRequest()
+                request.predicate = NSPredicate(format: "symbol == %@", symbol)
+                request.fetchLimit = 1
+
+                guard let entity = try backgroundContext.fetch(request).first else {
+                    logger.warning("Attempted to toggle watchlist for missing coin: \(symbol)")
+                    return
+                }
+
+                entity.isWatchlisted.toggle()
+                try backgroundContext.save()
+                logger.info("Toggled watchlist for symbol: \(symbol) to \(entity.isWatchlisted)")
+            }
+        }
 }
+
+extension CachedMarketRepository: WatchlistWritable {}

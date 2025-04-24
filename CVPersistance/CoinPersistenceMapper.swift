@@ -8,25 +8,27 @@ import CVDomain
 import CoreData
 
 public enum CoinPersistenceMapper {
-    public static func map(entity: CoinEntity) -> Coin? {
-        guard let symbol = entity.symbol,
-              let baseAsset = entity.baseAsset,
-              let quoteAsset = entity.quoteAsset else {
-            return nil
-        }
+    public static func map(entities: [CoinEntity]) -> [Coin] {
+        entities.compactMap { entity in
+            guard let symbol = entity.symbol, let base = entity.baseAsset, let quote = entity.quoteAsset else {
+                return nil
+            }
 
-        return Coin(symbol: symbol, baseAsset: baseAsset, quoteAsset: quoteAsset)
+            return Coin(symbol: symbol, baseAsset: base, quoteAsset: quote, isWatchlisted: entity.isWatchlisted)
+        }
     }
 
     public static func map(domain: Coin, into context: NSManagedObjectContext) -> CoinEntity {
-        let entity = CoinEntity(context: context)
+        let request: NSFetchRequest<CoinEntity> = CoinEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "symbol == %@", domain.symbol)
+        request.fetchLimit = 1
+
+        let entity = (try? context.fetch(request).first) ?? CoinEntity(context: context)
         entity.symbol = domain.symbol
         entity.baseAsset = domain.baseAsset
         entity.quoteAsset = domain.quoteAsset
-        return entity
-    }
+        entity.isWatchlisted = domain.isWatchlisted || entity.isWatchlisted
 
-    public static func map(entities: [CoinEntity]) -> [Coin] {
-        entities.compactMap { map(entity: $0) }
+        return entity
     }
 }

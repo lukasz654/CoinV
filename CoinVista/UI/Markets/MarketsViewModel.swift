@@ -6,6 +6,7 @@
 import Combine
 import CVCommunication
 import CVDomain
+import CVPersistance
 import Foundation
 import Utilities
 
@@ -26,14 +27,26 @@ final class MarketsViewModel: ObservableObject {
     @Published var error: BinanceServiceError?
 
     private let useCase: FetchMarketsUseCase
+    private let toggleWatchlistUseCase: ToggleWatchlistUseCase
     private var allItems: [MarketRowViewModel] = []
     private var cancellables = Set<AnyCancellable>()
-    private let logger = CVLog.shared
+    private var hasLoaded = false
+    private let logger: CVLogger = CVLog.shared
 
-    init(useCase: FetchMarketsUseCase) {
-        print("MarketsViewModel initialized")
+    init(
+        useCase: FetchMarketsUseCase,
+        toggleWatchlistUseCase: ToggleWatchlistUseCase
+    ) {
         self.useCase = useCase
+        self.toggleWatchlistUseCase = toggleWatchlistUseCase
         setupBindings()
+    }
+
+    func loadIfNeeded() async {
+        guard !hasLoaded else {
+            return
+        }
+        await load()
     }
 
     func load() async {
@@ -68,10 +81,41 @@ final class MarketsViewModel: ObservableObject {
                 loadState = .failure
             }
         }
+        hasLoaded = true
     }
 
     func retry() async {
         await load()
+    }
+
+    func toggleWatchlist(for symbol: String) {
+        Task {
+            do {
+                try toggleWatchlistUseCase.execute(symbol: symbol)
+                logger.info("User toggled watchlist for \(symbol)")
+
+                if let index = allItems.firstIndex(where: { $0.id == symbol }) {
+                    let item = allItems[index]
+
+                    let updatedCoin = Coin(
+                        symbol: item.coin.symbol,
+                        baseAsset: item.coin.baseAsset,
+                        quoteAsset: item.coin.quoteAsset,
+                        isWatchlisted: !item.coin.isWatchlisted
+                    )
+
+                    let updatedItem = MarketRowViewModel(
+                        coin: updatedCoin,
+                        quote: item.quote
+                    )
+
+                    allItems[index] = updatedItem
+                    applyFilter()
+                }
+            } catch {
+                logger.error("Failed to toggle watchlist for \(symbol): \(error)")
+            }
+        }
     }
 
     func applyFilter() {

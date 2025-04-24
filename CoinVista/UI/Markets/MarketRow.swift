@@ -11,8 +11,18 @@ struct MarketRow: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(item.name)
-                .font(.headline)
+            HStack {
+                Text(item.name)
+                    .font(.headline)
+
+                Spacer()
+
+                if item.isWatchlisted {
+                    Image(systemName: "star.fill")
+                        .foregroundColor(.yellow)
+                }
+            }
+
             HStack {
                 Text(item.price)
                 Spacer()
@@ -26,10 +36,35 @@ struct MarketRow: View {
 }
 
 #if DEBUG
-#Preview("MarketRow") {
+#Preview("MarketRow – Watchlisted") {
     MarketRow(item: MarketRowViewModel(
-        coin: Coin(symbol: "BTCUSDT", baseAsset: "BTC", quoteAsset: "USDT"),
-        quote: CoinQuote(symbol: "BTCUSDT", price: 29500.12, priceChangePercent: -0.5)
+        coin: Coin(
+            symbol: "BTCUSDT",
+            baseAsset: "BTC",
+            quoteAsset: "USDT",
+            isWatchlisted: true
+        ),
+        quote: CoinQuote(
+            symbol: "BTCUSDT",
+            price: 29500.12,
+            priceChangePercent: -0.5
+        )
+    ))
+}
+
+#Preview("MarketRow – Not Watchlisted") {
+    MarketRow(item: MarketRowViewModel(
+        coin: Coin(
+            symbol: "BTCUSDT",
+            baseAsset: "BTC",
+            quoteAsset: "USDT",
+            isWatchlisted: false
+        ),
+        quote: CoinQuote(
+            symbol: "BTCUSDT",
+            price: 29500.12,
+            priceChangePercent: -0.5
+        )
     ))
 }
 #endif

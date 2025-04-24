@@ -13,8 +13,6 @@ struct MarketErrorViewModel {
     static func message(for error: Error) -> String {
         if let error = error as? BinanceServiceError {
             switch error {
-            case .invalidConfiguration:
-                return "Configuration error"
             case .invalidURL:
                 return "Invalid URL"
             case .requestFailed(let err):
