@@ -10,7 +10,7 @@ import Utilities
 
 public final class CachedMarketRepository: MarketRepository {
 
-    private let logger = CVLog.shared
+    private let logger: CVLogger
 
     private let viewContext: NSManagedObjectContext
     private let backgroundContext: NSManagedObjectContext
@@ -18,14 +18,16 @@ public final class CachedMarketRepository: MarketRepository {
     private let calendar: Calendar
     private let freshnessThreshold: TimeInterval = 3600 // 1 hour
 
-    public init(viewContext: NSManagedObjectContext = PersistenceController.shared.viewContext,
-                backgroundContext: NSManagedObjectContext = PersistenceController.shared.backgroundContext,
+    public init(viewContext: NSManagedObjectContext,
+                backgroundContext: NSManagedObjectContext,
                 remote: MarketRepository,
-                calendar: Calendar = .current) {
+                calendar: Calendar = .current,
+                logger: CVLogger) {
         self.viewContext = viewContext
         self.backgroundContext = backgroundContext
         self.remote = remote
         self.calendar = calendar
+        self.logger = logger
     }
 
     public func fetchCoins() async throws -> [Coin] {
@@ -35,7 +37,7 @@ public final class CachedMarketRepository: MarketRepository {
         } else {
             logger.info("Fetching fresh exchange info from remote.")
             let coins = try await remote.fetchCoins()
-            try persist(coins: coins)
+            try await persist(coins: coins)
             try saveLastFetchDate(type: "exchangeInfo")
             return coins
         }
@@ -57,12 +59,14 @@ public final class CachedMarketRepository: MarketRepository {
         return CoinPersistenceMapper.map(entities: result)
     }
 
-    private func persist(coins: [Coin]) throws {
-        try backgroundContext.performAndWait {
+    private func persist(coins: [Coin]) async throws {
+        try await backgroundContext.perform { [weak self] in
+            guard let self else {
+                return
+            }
             for coin in coins {
                 _ = CoinPersistenceMapper.map(domain: coin, into: backgroundContext)
             }
-
             try backgroundContext.save()
             logger.info("Persisted \(coins.count) coins to cache.")
         }
@@ -75,7 +79,7 @@ public final class CachedMarketRepository: MarketRepository {
         } else {
             logger.info("Fetching fresh quotes from remote.")
             let quotes = try await remote.fetchQuotes()
-            try persist(quotes: quotes)
+            try await persist(quotes: quotes)
             try saveLastFetchDate(type: "quotes")
             return quotes
         }
@@ -89,12 +93,14 @@ public final class CachedMarketRepository: MarketRepository {
         return result.compactMap { CoinQuotePersistenceMapper.map(entity: $0) }
     }
 
-    private func persist(quotes: [CoinQuote]) throws {
-        try backgroundContext.performAndWait {
+    private func persist(quotes: [CoinQuote]) async throws {
+        try await backgroundContext.perform { [weak self] in
+            guard let self else {
+                return
+            }
             for quote in quotes {
                 _ = CoinQuotePersistenceMapper.map(domain: quote, into: backgroundContext)
             }
-
             try backgroundContext.save()
             logger.info("Persisted \(quotes.count) quotes to cache.")
         }
@@ -124,22 +130,25 @@ public final class CachedMarketRepository: MarketRepository {
         }
     }
 
-    public func toggleWatchlist(for symbol: String) throws {
-            try backgroundContext.performAndWait {
-                let request: NSFetchRequest<CoinEntity> = CoinEntity.fetchRequest()
-                request.predicate = NSPredicate(format: "symbol == %@", symbol)
-                request.fetchLimit = 1
-
-                guard let entity = try backgroundContext.fetch(request).first else {
-                    logger.warning("Attempted to toggle watchlist for missing coin: \(symbol)")
-                    return
-                }
-
-                entity.isWatchlisted.toggle()
-                try backgroundContext.save()
-                logger.info("Toggled watchlist for symbol: \(symbol) to \(entity.isWatchlisted)")
+    public func toggleWatchlist(for symbol: String) async throws {
+        try await backgroundContext.perform { [weak self] in
+            guard let self else {
+                return
             }
+            let request: NSFetchRequest<CoinEntity> = CoinEntity.fetchRequest()
+            request.predicate = NSPredicate(format: "symbol == %@", symbol)
+            request.fetchLimit = 1
+
+            guard let entity = try backgroundContext.fetch(request).first else {
+                logger.warning("Attempted to toggle watchlist for missing coin: \(symbol)")
+                return
+            }
+
+            entity.isWatchlisted.toggle()
+            try backgroundContext.save()
+            logger.info("Toggled watchlist for symbol: \(symbol) to \(entity.isWatchlisted)")
         }
+    }
 }
 
 extension CachedMarketRepository: WatchlistWritable {}

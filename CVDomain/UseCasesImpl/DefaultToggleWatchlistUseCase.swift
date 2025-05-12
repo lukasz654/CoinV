@@ -10,7 +10,7 @@ public final class DefaultToggleWatchlistUseCase: ToggleWatchlistUseCase {
         self.repository = repository
     }
 
-    public func execute(symbol: String) throws {
-        try repository.toggleWatchlist(for: symbol)
+    public func execute(symbol: String) async throws {
+        try await repository.toggleWatchlist(for: symbol)
     }
 }

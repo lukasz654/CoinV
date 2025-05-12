@@ -29,7 +29,7 @@ public final class PersistenceController {
 
     private let logger = CVLog.shared
 
-    private init(inMemory: Bool = false) {
+    public init(inMemory: Bool = false) {
         do {
             guard let modelURL = Bundle(for: Self.self).url(forResource: "CVModel", withExtension: "momd"),
                   let model = NSManagedObjectModel(contentsOf: modelURL) else {

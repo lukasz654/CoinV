@@ -4,5 +4,5 @@
 //  Created by lla.
 
 public protocol ToggleWatchlistUseCase {
-    func execute(symbol: String) throws
+    func execute(symbol: String) async throws
 }

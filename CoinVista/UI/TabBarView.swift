@@ -15,20 +15,9 @@ struct TabBarView: View {
 
     @StateObject private var viewModel: MarketsViewModel
 
-       init() {
-           let configuration = BinanceConfiguration()
-           let service = BinanceMarketService(configuration: configuration)
-           let remote = MarketRepositoryImpl(service: service)
-           let repository = CachedMarketRepository(remote: remote)
-           let fetchUseCase = DefaultFetchMarketsUseCase(repository: repository)
-           let toggleUseCase = DefaultToggleWatchlistUseCase(repository: repository)
-           let viewModel = MarketsViewModel(useCase: fetchUseCase,toggleWatchlistUseCase: toggleUseCase)
-           _viewModel = StateObject(wrappedValue:
-                                        MarketsViewModel(
-                                            useCase: fetchUseCase,
-                                            toggleWatchlistUseCase: toggleUseCase)
-           )
-       }
+    init(container: AppDependencyContainer = AppDependencyContainer()) {
+        _viewModel = StateObject(wrappedValue: container.makeMarketsViewModel())
+    }
 
     var body: some View {
         TabView {

@@ -31,14 +31,14 @@ final class MarketsViewModel: ObservableObject {
     private var allItems: [MarketRowViewModel] = []
     private var cancellables = Set<AnyCancellable>()
     private var hasLoaded = false
-    private let logger: CVLogger = CVLog.shared
+    private let logger: CVLogger
 
-    init(
-        useCase: FetchMarketsUseCase,
-        toggleWatchlistUseCase: ToggleWatchlistUseCase
-    ) {
+    init(useCase: FetchMarketsUseCase,
+         toggleWatchlistUseCase: ToggleWatchlistUseCase,
+         logger: CVLogger) {
         self.useCase = useCase
         self.toggleWatchlistUseCase = toggleWatchlistUseCase
+        self.logger = logger
         setupBindings()
     }
 
@@ -91,7 +91,7 @@ final class MarketsViewModel: ObservableObject {
     func toggleWatchlist(for symbol: String) {
         Task {
             do {
-                try toggleWatchlistUseCase.execute(symbol: symbol)
+                try await toggleWatchlistUseCase.execute(symbol: symbol)
                 logger.info("User toggled watchlist for \(symbol)")
 
                 if let index = allItems.firstIndex(where: { $0.id == symbol }) {
