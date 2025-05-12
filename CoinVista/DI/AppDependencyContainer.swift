@@ -36,21 +36,11 @@ final class AppDependencyContainer {
     }
 
     @MainActor
-    func makeMarketsViewModel() -> MarketsViewModel {
-        let stateManager = MarketListStateManager(
-            toggleUseCase: DefaultToggleWatchlistUseCase(repository: cachedRepository),
+    func makeMarketStore() -> MarketStore {
+        MarketStore(
+            fetchUseCase: DefaultFetchMarketsUseCase(repository: cachedRepository),
+            toggleWatchlistUseCase: DefaultToggleWatchlistUseCase(repository: cachedRepository),
             logger: logger
-        )
-
-        let dataLoader = MarketDataLoader(
-            useCase: DefaultFetchMarketsUseCase(repository: cachedRepository),
-            stateManager: stateManager,
-            logger: logger
-        )
-
-        return MarketsViewModel(
-            dataLoader: dataLoader,
-            stateManager: stateManager
         )
     }
 

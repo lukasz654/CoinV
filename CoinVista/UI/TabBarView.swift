@@ -13,10 +13,10 @@ struct TabBarView: View {
 
     private let logger = CVLog.shared
 
-    @StateObject private var viewModel: MarketsViewModel
+    @StateObject private var viewModel: MarketStore
 
     init(container: AppDependencyContainer = AppDependencyContainer()) {
-        _viewModel = StateObject(wrappedValue: container.makeMarketsViewModel())
+        _viewModel = StateObject(wrappedValue: container.makeMarketStore())
     }
 
     var body: some View {

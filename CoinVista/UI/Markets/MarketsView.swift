@@ -7,7 +7,7 @@ import CVDomain
 import SwiftUI
 
 struct MarketsView: View {
-    @StateObject var viewModel: MarketsViewModel
+    @StateObject var viewModel: MarketStore
 
     var body: some View {
         NavigationStack {
@@ -74,6 +74,7 @@ struct MarketsView: View {
 #if DEBUG
 import CVDomain
 import Utilities
+import SwiftUI
 
 final class MockFetchMarketsUseCase: FetchMarketsUseCase {
     func execute() async throws -> [(coin: Coin, quote: CoinQuote?)] {
@@ -103,11 +104,15 @@ final class MockLogger: CVLogger {
 
 #Preview("MarketsView") {
     let logger = MockLogger()
-    let toggle = MockToggleWatchlistUseCase()
     let fetch = MockFetchMarketsUseCase()
-    let stateManager = MarketListStateManager(toggleUseCase: toggle, logger: logger)
-    let loader = MarketDataLoader(useCase: fetch, stateManager: stateManager, logger: logger)
-    let vm = MarketsViewModel(dataLoader: loader, stateManager: stateManager)
-    MarketsView(viewModel: vm)
+    let toggle = MockToggleWatchlistUseCase()
+
+    let store = MarketStore(
+        fetchUseCase: fetch,
+        toggleWatchlistUseCase: toggle,
+        logger: logger
+    )
+
+    return MarketsView(viewModel: store)
 }
 #endif
