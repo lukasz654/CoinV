@@ -13,11 +13,13 @@ public final class DefaultFetchMarketsUseCase: FetchMarketsUseCase {
     }
 
     public func execute() async throws -> [(coin: Coin, quote: CoinQuote?)] {
-        let coins = try await repository.fetchCoins()
-        let quotes = try await repository.fetchQuotes()
-
+        async let coinsTask = repository.fetchCoins()
+        async let quotesTask = repository.fetchQuotes()
+        
+        let (coins, quotes) = try await (coinsTask, quotesTask)
+        
         let quoteMap = Dictionary(uniqueKeysWithValues: quotes.map { ($0.symbol, $0) })
-
+        
         return coins.map { coin in
             (coin, quoteMap[coin.symbol])
         }

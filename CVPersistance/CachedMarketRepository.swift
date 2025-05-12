@@ -8,6 +8,11 @@ import CVDomain
 import Foundation
 import Utilities
 
+public enum FetchType: String {
+    case coins = "exchangeInfo"
+    case quotes = "quotes"
+}
+
 public final class CachedMarketRepository: MarketRepository {
 
     private let logger: CVLogger
@@ -17,6 +22,8 @@ public final class CachedMarketRepository: MarketRepository {
     private let remote: MarketRepository
     private let calendar: Calendar
     private let freshnessThreshold: TimeInterval = 3600 // 1 hour
+    private let coinsFetcher: CachedFetcher<Coin, CoinEntity>
+    private let quotesFetcher: CachedFetcher<CoinQuote, CoinQuoteEntity>
 
     public init(viewContext: NSManagedObjectContext,
                 backgroundContext: NSManagedObjectContext,
@@ -28,19 +35,58 @@ public final class CachedMarketRepository: MarketRepository {
         self.remote = remote
         self.calendar = calendar
         self.logger = logger
+        
+        self.coinsFetcher = CachedFetcher(
+                fetchType: .coins,
+                remoteFetch: { try await remote.fetchCoins() },
+                fetchFromCache: {
+                    let request = CoinEntity.fetchRequest()
+                    request.sortDescriptors = [NSSortDescriptor(key: "symbol", ascending: true)]
+                    let result = (try? viewContext.fetch(request)) ?? []
+                    return CoinPersistenceMapper.map(entities: result)
+                },
+                persist: { coins in
+                    try await backgroundContext.perform {
+                        for coin in coins {
+                            _ = CoinPersistenceMapper.map(domain: coin, into: backgroundContext)
+                        }
+                        try backgroundContext.save()
+                        logger.info("Persisted \(coins.count) coins to cache.")
+                    }
+                },
+                backgroundContext: backgroundContext,
+                viewContext: viewContext,
+                calendar: calendar,
+                logger: logger
+            )
+
+            self.quotesFetcher = CachedFetcher(
+                fetchType: .quotes,
+                remoteFetch: { try await remote.fetchQuotes() },
+                fetchFromCache: {
+                    let request = CoinQuoteEntity.fetchRequest()
+                    request.sortDescriptors = [NSSortDescriptor(key: "symbol", ascending: true)]
+                    let result = (try? viewContext.fetch(request)) ?? []
+                    return result.compactMap { CoinQuotePersistenceMapper.map(entity: $0) }
+                },
+                persist: { quotes in
+                    try await backgroundContext.perform {
+                        for quote in quotes {
+                            _ = CoinQuotePersistenceMapper.map(domain: quote, into: backgroundContext)
+                        }
+                        try backgroundContext.save()
+                        logger.info("Persisted \(quotes.count) quotes to cache.")
+                    }
+                },
+                backgroundContext: backgroundContext,
+                viewContext: viewContext,
+                calendar: calendar,
+                logger: logger
+            )
     }
 
     public func fetchCoins() async throws -> [Coin] {
-        if let lastFetch = try? fetchLastFetchDate(type: "exchangeInfo"), isFresh(date: lastFetch) {
-            logger.info("Using cached exchange info.")
-            return fetchFromCache()
-        } else {
-            logger.info("Fetching fresh exchange info from remote.")
-            let coins = try await remote.fetchCoins()
-            try await persist(coins: coins)
-            try saveLastFetchDate(type: "exchangeInfo")
-            return coins
-        }
+        try await coinsFetcher.fetch().sorted { $0.symbol < $1.symbol }
     }
 
     private func isFresh(date: Date) -> Bool {
@@ -73,16 +119,7 @@ public final class CachedMarketRepository: MarketRepository {
     }
     
     public func fetchQuotes() async throws -> [CoinQuote] {
-        if let lastFetch = try? fetchLastFetchDate(type: "quotes"), isFresh(date: lastFetch) {
-            logger.info("Using cached quotes.")
-            return fetchQuotesFromCache()
-        } else {
-            logger.info("Fetching fresh quotes from remote.")
-            let quotes = try await remote.fetchQuotes()
-            try await persist(quotes: quotes)
-            try saveLastFetchDate(type: "quotes")
-            return quotes
-        }
+        try await quotesFetcher.fetch().sorted { $0.symbol < $1.symbol }
     }
 
     private func fetchQuotesFromCache() -> [CoinQuote] {

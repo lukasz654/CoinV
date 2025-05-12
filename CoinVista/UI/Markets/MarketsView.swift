@@ -57,7 +57,9 @@ struct MarketsView: View {
             MarketRow(item: item)
                 .swipeActions(edge: .leading, allowsFullSwipe: true) {
                     Button {
-                        viewModel.toggleWatchlist(for: item.id)
+                        Task {
+                                await viewModel.toggleWatchlist(for: item.id)
+                            }
                     } label: {
                         Label(item.isWatchlisted ? "Remove" : "Add", systemImage: item.isWatchlisted ? "star.slash" : "star")
                     }
@@ -71,6 +73,7 @@ struct MarketsView: View {
 
 #if DEBUG
 import CVDomain
+import Utilities
 
 final class MockFetchMarketsUseCase: FetchMarketsUseCase {
     func execute() async throws -> [(coin: Coin, quote: CoinQuote?)] {
@@ -88,14 +91,23 @@ final class MockFetchMarketsUseCase: FetchMarketsUseCase {
 }
 
 final class MockToggleWatchlistUseCase: ToggleWatchlistUseCase {
-    func execute(symbol: String) throws {
-    }
+    func execute(symbol: String) async throws {}
+}
+
+final class MockLogger: CVLogger {
+    func debug(_ message: String) {}
+    func info(_ message: String) {}
+    func warning(_ message: String) {}
+    func error(_ message: String) {}
 }
 
 #Preview("MarketsView") {
-    let fetchUseCase = MockFetchMarketsUseCase()
-    let toggleUseCase = MockToggleWatchlistUseCase()
-    let vm = MarketsViewModel(useCase: fetchUseCase, toggleWatchlistUseCase: toggleUseCase)
-    return MarketsView(viewModel: vm)
+    let logger = MockLogger()
+    let toggle = MockToggleWatchlistUseCase()
+    let fetch = MockFetchMarketsUseCase()
+    let stateManager = MarketListStateManager(toggleUseCase: toggle, logger: logger)
+    let loader = MarketDataLoader(useCase: fetch, stateManager: stateManager, logger: logger)
+    let vm = MarketsViewModel(dataLoader: loader, stateManager: stateManager)
+    MarketsView(viewModel: vm)
 }
 #endif
